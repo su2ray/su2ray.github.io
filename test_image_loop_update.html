@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html></html>
+<meta http-equiv="refresh" content="20"> 
+<body>
+
+<h2>Numerical weather prediction products</h2> 
+
+<div><img id='demo'></img></div>
+
+<script>
+// This is the function for strin format//
+String.prototype.format = function (args) {
+		var str = this;
+		return str.replace(String.prototype.format.regex, function(item) {
+		var intVal = parseInt(item.substring(1, item.length - 1));
+		var replace;
+		if (intVal >= 0) {
+				replace = args[intVal];
+			} else if (intVal === -1) {
+				replace = "{";
+			} else if (intVal === -2) {
+				replace = "}";
+			} else {
+				replace = "";
+			}
+			return replace;
+		});
+	};
+	String.prototype.format.regex = new RegExp("{-?[0-9]+}", "g");
+
+//***********************getinitime***********************//
+var initime="20022100";
+var today = new Date(); 
+var yesterday= new Date();
+yesterday.setDate(today.getDate()-1);//
+var year=today.getFullYear();
+var year2 = year.toString();
+var hr=today.getHours();
+document.write(year2.slice(2,))
+//if ( hr >=13 || hr<=18 ){//
+	//initime=year.slice(2,4)+(today.getMonth()+1)+today.getDate()+"00";//
+//} else {
+//	initime=year.slice(2,4)+(yesterday.getMonth()+1)+yesterday.getDate()+"18";
+//}
+// *********************** Variable *********************** //
+var tau=["000","003","006","012"]; 
+var domain=['D1','D2'];
+var imageList = [
+	"https://npd.cwb.gov.tw/NPD/irisme_data/grapher/gifdir/Nwww/WRFM04_NEW/WWW_WRF_D1_{0}_{1}_B10A01.gif".format( [ tau[0] ,initime] ), 
+	"https://npd.cwb.gov.tw/NPD/irisme_data/grapher/gifdir/Nwww/GFS_NEW/WWW_GFS_{0}_{1}_20021918_B62A01X2B.gif".format( [ domain[0] , tau[2] ] ),     
+    "https://npd.cwb.gov.tw/NPD/irisme_data/grapher/gifdir/Nwww/GFS_NEW/WWW_GFS_D1_012_20021918_B62A01X2B.gif",
+	"https://npd.cwb.gov.tw/NPD/irisme_data/Ensemble/EN_QPF/EN2_QPF_ACCU_012_20022006.gif"
+	];
+var freq = 3//sec
+// *********************** Variable *********************** //
+
+// *********************** RunLoop *********************** //
+var demo = document.getElementById('demo');
+var index = 0;
+function changeImage(){
+	demo.setAttribute("src", imageList[index]);
+	index ++;
+	if(index >= imageList.length){
+		index=0;
+	};
+};
+setInterval(changeImage, freq*1000);
+// *********************** RunLoop *********************** //
+</script>
+</body>
+</html>

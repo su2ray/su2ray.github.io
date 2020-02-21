@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html></html>
-<meta http-equiv="refresh" content="20"> 
+<meta http-equiv="refresh" content="100"> 
 <body>
 
 <h2>Numerical weather prediction products</h2> 
 
 <div><img id='demo'></img></div>
-
+<p id="text1"></p>
 <script>
 // This is the function for strin format//
 String.prototype.format = function (args) {
@@ -43,13 +43,46 @@ document.write(year2.slice(2,))
 //	initime=year.slice(2,4)+(yesterday.getMonth()+1)+yesterday.getDate()+"18";
 //}
 // *********************** Variable *********************** //
+var initime=["20022018","20022100"];
 var tau=["000","003","006","012"]; 
+var tau2=["012","024","036","048"]; 
+var fieldwrf=["B10A01","B62A01","DR2"];
+var field=["SSL010","850000","500000"];
 var domain=['D1','D2'];
 var imageList = [
-	"https://npd.cwb.gov.tw/NPD/irisme_data/grapher/gifdir/Nwww/WRFM04_NEW/WWW_WRF_D1_{0}_{1}_B10A01.gif".format( [ tau[0] ,initime] ), 
-	"https://npd.cwb.gov.tw/NPD/irisme_data/grapher/gifdir/Nwww/GFS_NEW/WWW_GFS_{0}_{1}_20021918_B62A01X2B.gif".format( [ domain[0] , tau[2] ] ),     
-    "https://npd.cwb.gov.tw/NPD/irisme_data/grapher/gifdir/Nwww/GFS_NEW/WWW_GFS_D1_012_20021918_B62A01X2B.gif",
-	"https://npd.cwb.gov.tw/NPD/irisme_data/Ensemble/EN_QPF/EN2_QPF_ACCU_012_20022006.gif"
+	"https://npd.cwb.gov.tw/NPD/irisme_data/grapher/gifdir/Nwww/WRFM04_NEW/WWW_WRF_D2_{0}_{1}_{2}.gif".format( [ tau2[0] ,initime[1] ,fieldwrf[0]]), 
+	"https://npd.cwb.gov.tw/NPD/irisme_data/grapher/gifdir/Nwww/WRFM04_NEW/WWW_WRF_D2_{0}_{1}_{2}.gif".format( [ tau2[1] ,initime[1] ,fieldwrf[0]]), 
+	"https://npd.cwb.gov.tw/NPD/irisme_data/grapher/gifdir/Nwww/WRFM04_NEW/WWW_WRF_D2_{0}_{1}_{2}.gif".format( [ tau2[2] ,initime[1] ,fieldwrf[0]]), 
+	"https://npd.cwb.gov.tw/NPD/irisme_data/grapher/gifdir/Nwww/WRFM04_NEW/WWW_WRF_D2_{0}_{1}_{2}.gif".format( [ tau2[3] ,initime[1] ,fieldwrf[0]]), 
+	"https://npd.cwb.gov.tw/NPD/irisme_data/grapher/gifdir/Nwww/WRFM04_NEW/WWW_WRF_D2_{0}_{1}_{2}.gif".format( [ tau2[0] ,initime[1] ,fieldwrf[1]]), 
+	"https://npd.cwb.gov.tw/NPD/irisme_data/grapher/gifdir/Nwww/WRFM04_NEW/WWW_WRF_D2_{0}_{1}_{2}.gif".format( [ tau2[1] ,initime[1] ,fieldwrf[1]]), 
+	"https://npd.cwb.gov.tw/NPD/irisme_data/grapher/gifdir/Nwww/WRFM04_NEW/WWW_WRF_D2_{0}_{1}_{2}.gif".format( [ tau2[2] ,initime[1] ,fieldwrf[1]]), 
+	"https://npd.cwb.gov.tw/NPD/irisme_data/grapher/gifdir/Nwww/WRFM04_NEW/WWW_WRF_D2_{0}_{1}_{2}.gif".format( [ tau2[3] ,initime[1] ,fieldwrf[1]]), 
+	"https://npd.cwb.gov.tw/NPD/irisme_data/grapher/gifdir/Nwww/WRFM04_NEW/WWW_WRF_D2_{0}_{1}_{2}.gif".format( [ tau2[0] ,initime[1] ,fieldwrf[2]]), 
+	"https://npd.cwb.gov.tw/NPD/irisme_data/grapher/gifdir/Nwww/WRFM04_NEW/WWW_WRF_D2_{0}_{1}_{2}.gif".format( [ tau2[1] ,initime[1] ,fieldwrf[2]]), 
+	"https://npd.cwb.gov.tw/NPD/irisme_data/grapher/gifdir/Nwww/WRFM04_NEW/WWW_WRF_D2_{0}_{1}_{2}.gif".format( [ tau2[2] ,initime[1] ,fieldwrf[2]]), 
+	"https://npd.cwb.gov.tw/NPD/irisme_data/grapher/gifdir/Nwww/WRFM04_NEW/WWW_WRF_D2_{0}_{1}_{2}.gif".format( [ tau2[3] ,initime[1] ,fieldwrf[2]]),    
+    "https://npd.cwb.gov.tw/NPD/irisme_data/Ensemble/EN_QPF/EN2_QPF_ACCU_{0}_{1}.gif".format( [ tau2[0] ,initime[0]]),
+	"https://npd.cwb.gov.tw/NPD/irisme_data/Ensemble/EN_QPF/EN2_QPF_ACCU_{0}_{1}.gif".format( [ tau2[1] ,initime[0]]),
+	"https://npd.cwb.gov.tw/NPD/irisme_data/Ensemble/EN_QPF/EN2_QPF_ACCU_{0}_{1}.gif".format( [ tau2[2] ,initime[0]]),
+	"https://npd.cwb.gov.tw/NPD/irisme_data/Ensemble/EN_QPF/EN2_QPF_ACCU_{0}_{1}.gif".format( [ tau2[3] ,initime[0]]),
+	"https://npd.cwb.gov.tw/NPD/irisme_data/Ensemble/EN_spread/EN_spread_{0}_{1}_{2}.gif".format( [ field[0],tau2[0] ,initime[0]]),
+	"https://npd.cwb.gov.tw/NPD/irisme_data/Ensemble/EN_spread/EN_spread_{0}_{1}_{2}.gif".format( [ field[0],tau2[1] ,initime[0]]),
+	"https://npd.cwb.gov.tw/NPD/irisme_data/Ensemble/EN_spread/EN_spread_{0}_{1}_{2}.gif".format( [ field[0],tau2[2] ,initime[0]]),
+	"https://npd.cwb.gov.tw/NPD/irisme_data/Ensemble/EN_spread/EN_spread_{0}_{1}_{2}.gif".format( [ field[0],tau2[3] ,initime[0]]),
+	"https://npd.cwb.gov.tw/NPD/irisme_data/Ensemble/EN_spread/EN_spread_{0}_{1}_{2}.gif".format( [ field[1],tau2[0] ,initime[0]]),
+	"https://npd.cwb.gov.tw/NPD/irisme_data/Ensemble/EN_spread/EN_spread_{0}_{1}_{2}.gif".format( [ field[1],tau2[1] ,initime[0]]),
+	"https://npd.cwb.gov.tw/NPD/irisme_data/Ensemble/EN_spread/EN_spread_{0}_{1}_{2}.gif".format( [ field[1],tau2[2] ,initime[0]]),
+	"https://npd.cwb.gov.tw/NPD/irisme_data/Ensemble/EN_spread/EN_spread_{0}_{1}_{2}.gif".format( [ field[1],tau2[3] ,initime[0]]),
+	"https://npd.cwb.gov.tw/NPD/irisme_data/Ensemble/EN_spread/EN_spread_{0}_{1}_{2}.gif".format( [ field[2],tau2[0] ,initime[0]]),
+	"https://npd.cwb.gov.tw/NPD/irisme_data/Ensemble/EN_spread/EN_spread_{0}_{1}_{2}.gif".format( [ field[2],tau2[1] ,initime[0]]),
+	"https://npd.cwb.gov.tw/NPD/irisme_data/Ensemble/EN_spread/EN_spread_{0}_{1}_{2}.gif".format( [ field[2],tau2[2] ,initime[0]]),
+	"https://npd.cwb.gov.tw/NPD/irisme_data/Ensemble/EN_spread/EN_spread_{0}_{1}_{2}.gif".format( [ field[2],tau2[3] ,initime[0]]),
+	"https://npd.cwb.gov.tw/NPD/irisme_data/Ensemble/EN_spaghetti/EN_500_spa_{0}_{1}.gif".format( [ tau2[0] ,initime[0] ]),
+	"https://npd.cwb.gov.tw/NPD/irisme_data/Ensemble/EN_spaghetti/EN_500_spa_{0}_{1}.gif".format( [ tau2[1] ,initime[0] ]),
+	"https://npd.cwb.gov.tw/NPD/irisme_data/Ensemble/EN_spaghetti/EN_500_spa_{0}_{1}.gif".format( [ tau2[2] ,initime[0] ]),
+	"https://npd.cwb.gov.tw/NPD/irisme_data/Ensemble/EN_spaghetti/EN_500_spa_{0}_{1}.gif".format( [ tau2[3] ,initime[0] ]),
+	"https://scontent.ftpe8-2.fna.fbcdn.net/v/t1.15752-9/p1080x2048/86451125_170504001052204_7226255314146820096_n.jpg?_nc_cat=100&_nc_ohc=0r4H5uu9A4oAX8wUDuY&_nc_ht=scontent.ftpe8-2.fna&_nc_tp=6&oh=ff43909c62c58db947452b79e29beb64&oe=5EBA7A1D"
 	];
 var freq = 3//sec
 // *********************** Variable *********************** //
@@ -59,12 +92,13 @@ var demo = document.getElementById('demo');
 var index = 0;
 function changeImage(){
 	demo.setAttribute("src", imageList[index]);
+	document.getElementById("text1").innerHTML = imageList[index];
 	index ++;
 	if(index >= imageList.length){
 		index=0;
 	};
 };
-setInterval(changeImage, freq*1000);
+setInterval(changeImage, freq*750);
 // *********************** RunLoop *********************** //
 </script>
 </body>

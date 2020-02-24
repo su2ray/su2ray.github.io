@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html></html>
-<meta http-equiv="refresh" content="100"> 
+<meta http-equiv="refresh" content="300"> 
 <body>
 
 <h2>Numerical weather prediction products</h2> 
-
+<p id="text2"></p>
 <div><img id='demo'></img></div>
 <p id="text1"></p>
 <script>
@@ -27,24 +27,56 @@ String.prototype.format = function (args) {
 		});
 	};
 	String.prototype.format.regex = new RegExp("{-?[0-9]+}", "g");
+	
+	
+// This is the function for add hours//	
+Date.prototype.addHours= function(h){
+    var copiedDate = new Date(this.getTime());
+    copiedDate.setHours(copiedDate.getHours()+h);
+    return copiedDate;
+}
+	
+// This is the function for Caldtg as String//		
+Date.prototype.caloffdtg = function (args) {
+		var dtg= this;
+		var hh=dtg.getHours().toString();
+		if (hh >= 18 ) {
+			dtg.setHours(18);
+		} else if (hh >= 12) {
+			dtg.setHours(12);
+		} else if (hh >= 6) {
+			dtg.setHours(6);
+		} else if (hh >= 0) {
+			dtg.setHours(0);
+		}
+		var yy=dtg.getFullYear().toString().slice(2,);
+		var mm=(dtg.getMonth()+1).toString();
+		var dd=dtg.getDate().toString();
+		var hh=dtg.getHours().toString();
+		//var out=yy.concat(mm,dd,hh);
+		  return [(yy>9 ? '' : '0') + yy,
+          (mm>9 ? '' : '0') + mm,
+          (dd>9 ? '' : '0') + dd,
+		  (hh>9 ? '' : '0') + hh,
+         ].join('');
+		
+		
+	    //return out;
+}
 
 //***********************getinitime***********************//
-var initime="20022100";
-var today = new Date(); 
-var yesterday= new Date();
-yesterday.setDate(today.getDate()-1);//
-var year=today.getFullYear();
-var year2 = year.toString();
-var hr=today.getHours();
-document.write(year2.slice(2,))
-//if ( hr >=13 || hr<=18 ){//
-	//initime=year.slice(2,4)+(today.getMonth()+1)+today.getDate()+"00";//
-//} else {
-//	initime=year.slice(2,4)+(yesterday.getMonth()+1)+yesterday.getDate()+"18";
-//}
+
+var wrfday = new Date(); 
+var wrfday=wrfday.addHours(-14);
+var wepsday = new Date(); 
+var wepsday=wepsday.addHours(-22);
+var wrfday2=wrfday.caloffdtg();
+var wepsday2=wepsday.caloffdtg();
+var initime=[wepsday2,wrfday2];
+//document.getElementById("text2").innerHTML = initime;//
 // *********************** Variable *********************** //
-var initime=["20022312","20022318"];
-var tau=["000","003","006","012"]; 
+//var initime=["20022018","20022100"];//
+var tau=["12","24","36","48"]; 
 var tau2=["012","024","036","048"]; 
 var fieldwrf=["B10A01","B62A01","DR2"];
 var field=["SSL010","850000","500000"];
@@ -63,6 +95,11 @@ var imageList = [
 	"https://npd.cwb.gov.tw/NPD/irisme_data/grapher/gifdir/Nwww/WRFM04_NEW/WWW_WRF_D2_{0}_{1}_{2}.gif".format( [ tau2[1] ,initime[1] ,fieldwrf[2]]), 
 	"https://npd.cwb.gov.tw/NPD/irisme_data/grapher/gifdir/Nwww/WRFM04_NEW/WWW_WRF_D2_{0}_{1}_{2}.gif".format( [ tau2[2] ,initime[1] ,fieldwrf[2]]), 
 	"https://npd.cwb.gov.tw/NPD/irisme_data/grapher/gifdir/Nwww/WRFM04_NEW/WWW_WRF_D2_{0}_{1}_{2}.gif".format( [ tau2[3] ,initime[1] ,fieldwrf[2]]),    
+	"https://npd.cwb.gov.tw/NPD/irisme_data/BIAS_CORRECTION_M04/BC_T2m_{0}_{1}.gif".format( [ tau[0] ,initime[1] ]),
+	"https://npd.cwb.gov.tw/NPD/irisme_data/BIAS_CORRECTION_M04/BC_T2m_{0}_{1}.gif".format( [ tau[1] ,initime[1] ]),
+	"https://npd.cwb.gov.tw/NPD/irisme_data/BIAS_CORRECTION_M04/BC_T2m_{0}_{1}.gif".format( [ tau[2] ,initime[1] ]),
+	"https://npd.cwb.gov.tw/NPD/irisme_data/BIAS_CORRECTION_M04/BC_T2m_{0}_{1}.gif".format( [ tau[3] ,initime[1] ]),
+	"https://i.imgur.com/CPVpexw.png",
     "https://npd.cwb.gov.tw/NPD/irisme_data/Ensemble/EN_QPF/EN2_QPF_ACCU_{0}_{1}.gif".format( [ tau2[0] ,initime[0]]),
 	"https://npd.cwb.gov.tw/NPD/irisme_data/Ensemble/EN_QPF/EN2_QPF_ACCU_{0}_{1}.gif".format( [ tau2[1] ,initime[0]]),
 	"https://npd.cwb.gov.tw/NPD/irisme_data/Ensemble/EN_QPF/EN2_QPF_ACCU_{0}_{1}.gif".format( [ tau2[2] ,initime[0]]),
@@ -82,8 +119,7 @@ var imageList = [
 	"https://npd.cwb.gov.tw/NPD/irisme_data/Ensemble/EN_spaghetti/EN_500_spa_{0}_{1}.gif".format( [ tau2[0] ,initime[0] ]),
 	"https://npd.cwb.gov.tw/NPD/irisme_data/Ensemble/EN_spaghetti/EN_500_spa_{0}_{1}.gif".format( [ tau2[1] ,initime[0] ]),
 	"https://npd.cwb.gov.tw/NPD/irisme_data/Ensemble/EN_spaghetti/EN_500_spa_{0}_{1}.gif".format( [ tau2[2] ,initime[0] ]),
-	"https://npd.cwb.gov.tw/NPD/irisme_data/Ensemble/EN_spaghetti/EN_500_spa_{0}_{1}.gif".format( [ tau2[3] ,initime[0] ]),
-	"https://i.imgur.com/CPVpexw.png"
+	"https://npd.cwb.gov.tw/NPD/irisme_data/Ensemble/EN_spaghetti/EN_500_spa_{0}_{1}.gif".format( [ tau2[3] ,initime[0] ])
 		];
 var freq = 3//sec
 // *********************** Variable *********************** //

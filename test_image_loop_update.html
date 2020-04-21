@@ -4,7 +4,7 @@
 <style>
 img{
   max-width:70%;
-  max-height:800px;
+  max-height:70%;
   width=auto;
   height=auto;
 }
@@ -88,29 +88,54 @@ var initime=[wepsday2,wrfday2];
 //var initime=["20022018","20022100"];//
 var tau=["12","24","36","48"]; 
 var tau2=["012","024","036","048"]; 
-var fieldwrf=["B10A01","B62A01","DR2"];
+//var fieldwrf=["B10A01","B62A01","DR2"];
+var fieldwrf=["F24F00","F10F00","E10E00","ER2","D10D00","DR2","B10A01","B62A01","PWVX2B"];
 var field=["SSL010","850000","500000"];
 var domain=['D1','D2'];
 var imageList = [
 
-	"https://npd.cwb.gov.tw/NPD/irisme_data/grapher/gifdir/Nwww/WRFM04_NEW/WWW_WRF_D2_{0}_{1}_{2}.gif".format( [ tau2[0] ,initime[1] ,fieldwrf[0]]), 
-	"https://npd.cwb.gov.tw/NPD/irisme_data/grapher/gifdir/Nwww/WRFM04_NEW/WWW_WRF_D2_{0}_{1}_{2}.gif".format( [ tau2[1] ,initime[1] ,fieldwrf[0]]), 
-	"https://npd.cwb.gov.tw/NPD/irisme_data/grapher/gifdir/Nwww/WRFM04_NEW/WWW_WRF_D2_{0}_{1}_{2}.gif".format( [ tau2[2] ,initime[1] ,fieldwrf[0]]), 
-	"https://npd.cwb.gov.tw/NPD/irisme_data/grapher/gifdir/Nwww/WRFM04_NEW/WWW_WRF_D2_{0}_{1}_{2}.gif".format( [ tau2[3] ,initime[1] ,fieldwrf[0]]), 
-	"https://npd.cwb.gov.tw/NPD/irisme_data/grapher/gifdir/Nwww/WRFM04_NEW/WWW_WRF_D2_{0}_{1}_{2}.gif".format( [ tau2[0] ,initime[1] ,fieldwrf[1]]), 
-	"https://npd.cwb.gov.tw/NPD/irisme_data/grapher/gifdir/Nwww/WRFM04_NEW/WWW_WRF_D2_{0}_{1}_{2}.gif".format( [ tau2[1] ,initime[1] ,fieldwrf[1]]), 
-	"https://npd.cwb.gov.tw/NPD/irisme_data/grapher/gifdir/Nwww/WRFM04_NEW/WWW_WRF_D2_{0}_{1}_{2}.gif".format( [ tau2[2] ,initime[1] ,fieldwrf[1]]), 
-	"https://npd.cwb.gov.tw/NPD/irisme_data/grapher/gifdir/Nwww/WRFM04_NEW/WWW_WRF_D2_{0}_{1}_{2}.gif".format( [ tau2[3] ,initime[1] ,fieldwrf[1]]), 
-	"https://npd.cwb.gov.tw/NPD/irisme_data/grapher/gifdir/Nwww/WRFM04_NEW/WWW_WRF_D2_{0}_{1}_{2}.gif".format( [ tau2[0] ,initime[1] ,fieldwrf[2]]), 
-	"https://npd.cwb.gov.tw/NPD/irisme_data/grapher/gifdir/Nwww/WRFM04_NEW/WWW_WRF_D2_{0}_{1}_{2}.gif".format( [ tau2[1] ,initime[1] ,fieldwrf[2]]), 
-	"https://npd.cwb.gov.tw/NPD/irisme_data/grapher/gifdir/Nwww/WRFM04_NEW/WWW_WRF_D2_{0}_{1}_{2}.gif".format( [ tau2[2] ,initime[1] ,fieldwrf[2]]), 
-	"https://npd.cwb.gov.tw/NPD/irisme_data/grapher/gifdir/Nwww/WRFM04_NEW/WWW_WRF_D2_{0}_{1}_{2}.gif".format( [ tau2[3] ,initime[1] ,fieldwrf[2]]),    
+	"https://npd.cwb.gov.tw/NPD/irisme_data/grapher/gifdir/Nwww/WRFM04_NEW/WWW_WRF_D2_{0}_{1}_{2}.gif".format( [ tau2[0] ,initime[1] ,fieldwrf[0]]),
+	"https://npd.cwb.gov.tw/NPD/irisme_data/grapher/gifdir/Nwww/WRFM04_NEW/WWW_WRF_D2_{0}_{1}_{2}.gif".format( [ tau2[1] ,initime[1] ,fieldwrf[0]]),
+	"https://npd.cwb.gov.tw/NPD/irisme_data/grapher/gifdir/Nwww/WRFM04_NEW/WWW_WRF_D2_{0}_{1}_{2}.gif".format( [ tau2[2] ,initime[1] ,fieldwrf[0]]),
+	"https://npd.cwb.gov.tw/NPD/irisme_data/grapher/gifdir/Nwww/WRFM04_NEW/WWW_WRF_D2_{0}_{1}_{2}.gif".format( [ tau2[3] ,initime[1] ,fieldwrf[0]]),
+	"https://npd.cwb.gov.tw/NPD/irisme_data/grapher/gifdir/Nwww/WRFM04_NEW/WWW_WRF_D2_{0}_{1}_{2}.gif".format( [ tau2[0] ,initime[1] ,fieldwrf[1]]),
+	"https://npd.cwb.gov.tw/NPD/irisme_data/grapher/gifdir/Nwww/WRFM04_NEW/WWW_WRF_D2_{0}_{1}_{2}.gif".format( [ tau2[1] ,initime[1] ,fieldwrf[1]]),
+	"https://npd.cwb.gov.tw/NPD/irisme_data/grapher/gifdir/Nwww/WRFM04_NEW/WWW_WRF_D2_{0}_{1}_{2}.gif".format( [ tau2[2] ,initime[1] ,fieldwrf[1]]),
+	"https://npd.cwb.gov.tw/NPD/irisme_data/grapher/gifdir/Nwww/WRFM04_NEW/WWW_WRF_D2_{0}_{1}_{2}.gif".format( [ tau2[3] ,initime[1] ,fieldwrf[1]]),
+	"https://npd.cwb.gov.tw/NPD/irisme_data/grapher/gifdir/Nwww/WRFM04_NEW/WWW_WRF_D2_{0}_{1}_{2}.gif".format( [ tau2[0] ,initime[1] ,fieldwrf[2]]),
+	"https://npd.cwb.gov.tw/NPD/irisme_data/grapher/gifdir/Nwww/WRFM04_NEW/WWW_WRF_D2_{0}_{1}_{2}.gif".format( [ tau2[1] ,initime[1] ,fieldwrf[2]]),
+	"https://npd.cwb.gov.tw/NPD/irisme_data/grapher/gifdir/Nwww/WRFM04_NEW/WWW_WRF_D2_{0}_{1}_{2}.gif".format( [ tau2[2] ,initime[1] ,fieldwrf[2]]),
+	"https://npd.cwb.gov.tw/NPD/irisme_data/grapher/gifdir/Nwww/WRFM04_NEW/WWW_WRF_D2_{0}_{1}_{2}.gif".format( [ tau2[3] ,initime[1] ,fieldwrf[2]]),
+	"https://npd.cwb.gov.tw/NPD/irisme_data/grapher/gifdir/Nwww/WRFM04_NEW/WWW_WRF_D2_{0}_{1}_{2}.gif".format( [ tau2[0] ,initime[1] ,fieldwrf[3]]),
+	"https://npd.cwb.gov.tw/NPD/irisme_data/grapher/gifdir/Nwww/WRFM04_NEW/WWW_WRF_D2_{0}_{1}_{2}.gif".format( [ tau2[1] ,initime[1] ,fieldwrf[3]]),
+	"https://npd.cwb.gov.tw/NPD/irisme_data/grapher/gifdir/Nwww/WRFM04_NEW/WWW_WRF_D2_{0}_{1}_{2}.gif".format( [ tau2[2] ,initime[1] ,fieldwrf[3]]),
+	"https://npd.cwb.gov.tw/NPD/irisme_data/grapher/gifdir/Nwww/WRFM04_NEW/WWW_WRF_D2_{0}_{1}_{2}.gif".format( [ tau2[3] ,initime[1] ,fieldwrf[3]]),
+	"https://npd.cwb.gov.tw/NPD/irisme_data/grapher/gifdir/Nwww/WRFM04_NEW/WWW_WRF_D2_{0}_{1}_{2}.gif".format( [ tau2[0] ,initime[1] ,fieldwrf[4]]),
+	"https://npd.cwb.gov.tw/NPD/irisme_data/grapher/gifdir/Nwww/WRFM04_NEW/WWW_WRF_D2_{0}_{1}_{2}.gif".format( [ tau2[1] ,initime[1] ,fieldwrf[4]]),
+	"https://npd.cwb.gov.tw/NPD/irisme_data/grapher/gifdir/Nwww/WRFM04_NEW/WWW_WRF_D2_{0}_{1}_{2}.gif".format( [ tau2[2] ,initime[1] ,fieldwrf[4]]),
+	"https://npd.cwb.gov.tw/NPD/irisme_data/grapher/gifdir/Nwww/WRFM04_NEW/WWW_WRF_D2_{0}_{1}_{2}.gif".format( [ tau2[3] ,initime[1] ,fieldwrf[4]]),
+	"https://npd.cwb.gov.tw/NPD/irisme_data/grapher/gifdir/Nwww/WRFM04_NEW/WWW_WRF_D2_{0}_{1}_{2}.gif".format( [ tau2[0] ,initime[1] ,fieldwrf[5]]),
+	"https://npd.cwb.gov.tw/NPD/irisme_data/grapher/gifdir/Nwww/WRFM04_NEW/WWW_WRF_D2_{0}_{1}_{2}.gif".format( [ tau2[1] ,initime[1] ,fieldwrf[5]]),
+	"https://npd.cwb.gov.tw/NPD/irisme_data/grapher/gifdir/Nwww/WRFM04_NEW/WWW_WRF_D2_{0}_{1}_{2}.gif".format( [ tau2[2] ,initime[1] ,fieldwrf[5]]),
+	"https://npd.cwb.gov.tw/NPD/irisme_data/grapher/gifdir/Nwww/WRFM04_NEW/WWW_WRF_D2_{0}_{1}_{2}.gif".format( [ tau2[3] ,initime[1] ,fieldwrf[5]]),
+	"https://npd.cwb.gov.tw/NPD/irisme_data/grapher/gifdir/Nwww/WRFM04_NEW/WWW_WRF_D2_{0}_{1}_{2}.gif".format( [ tau2[0] ,initime[1] ,fieldwrf[6]]),
+	"https://npd.cwb.gov.tw/NPD/irisme_data/grapher/gifdir/Nwww/WRFM04_NEW/WWW_WRF_D2_{0}_{1}_{2}.gif".format( [ tau2[1] ,initime[1] ,fieldwrf[6]]),
+	"https://npd.cwb.gov.tw/NPD/irisme_data/grapher/gifdir/Nwww/WRFM04_NEW/WWW_WRF_D2_{0}_{1}_{2}.gif".format( [ tau2[2] ,initime[1] ,fieldwrf[6]]),
+	"https://npd.cwb.gov.tw/NPD/irisme_data/grapher/gifdir/Nwww/WRFM04_NEW/WWW_WRF_D2_{0}_{1}_{2}.gif".format( [ tau2[3] ,initime[1] ,fieldwrf[6]]),
+	"https://npd.cwb.gov.tw/NPD/irisme_data/grapher/gifdir/Nwww/WRFM04_NEW/WWW_WRF_D2_{0}_{1}_{2}.gif".format( [ tau2[0] ,initime[1] ,fieldwrf[7]]),
+	"https://npd.cwb.gov.tw/NPD/irisme_data/grapher/gifdir/Nwww/WRFM04_NEW/WWW_WRF_D2_{0}_{1}_{2}.gif".format( [ tau2[1] ,initime[1] ,fieldwrf[7]]),
+	"https://npd.cwb.gov.tw/NPD/irisme_data/grapher/gifdir/Nwww/WRFM04_NEW/WWW_WRF_D2_{0}_{1}_{2}.gif".format( [ tau2[2] ,initime[1] ,fieldwrf[7]]),
+	"https://npd.cwb.gov.tw/NPD/irisme_data/grapher/gifdir/Nwww/WRFM04_NEW/WWW_WRF_D2_{0}_{1}_{2}.gif".format( [ tau2[3] ,initime[1] ,fieldwrf[7]]),
+	"https://npd.cwb.gov.tw/NPD/irisme_data/grapher/gifdir/Nwww/WRFM04_NEW/WWW_WRF_D2_{0}_{1}_{2}.gif".format( [ tau2[0] ,initime[1] ,fieldwrf[8]]),
+	"https://npd.cwb.gov.tw/NPD/irisme_data/grapher/gifdir/Nwww/WRFM04_NEW/WWW_WRF_D2_{0}_{1}_{2}.gif".format( [ tau2[1] ,initime[1] ,fieldwrf[8]]),
+	"https://npd.cwb.gov.tw/NPD/irisme_data/grapher/gifdir/Nwww/WRFM04_NEW/WWW_WRF_D2_{0}_{1}_{2}.gif".format( [ tau2[2] ,initime[1] ,fieldwrf[8]]),
+	"https://npd.cwb.gov.tw/NPD/irisme_data/grapher/gifdir/Nwww/WRFM04_NEW/WWW_WRF_D2_{0}_{1}_{2}.gif".format( [ tau2[3] ,initime[1] ,fieldwrf[8]]),
 	"https://npd.cwb.gov.tw/NPD/irisme_data/BIAS_CORRECTION_M04/BC_T2m_{0}_{1}.gif".format( [ tau[0] ,initime[1] ]),
 	"https://npd.cwb.gov.tw/NPD/irisme_data/BIAS_CORRECTION_M04/BC_T2m_{0}_{1}.gif".format( [ tau[1] ,initime[1] ]),
 	"https://npd.cwb.gov.tw/NPD/irisme_data/BIAS_CORRECTION_M04/BC_T2m_{0}_{1}.gif".format( [ tau[2] ,initime[1] ]),
 	"https://npd.cwb.gov.tw/NPD/irisme_data/BIAS_CORRECTION_M04/BC_T2m_{0}_{1}.gif".format( [ tau[3] ,initime[1] ]),
 	"https://i.imgur.com/CPVpexw.png",
-    "https://npd.cwb.gov.tw/NPD/irisme_data/Ensemble/EN_QPF/EN2_QPF_ACCU_{0}_{1}.gif".format( [ tau2[0] ,initime[0]]),
+	"https://npd.cwb.gov.tw/NPD/irisme_data/Ensemble/EN_QPF/EN2_QPF_ACCU_{0}_{1}.gif".format( [ tau2[0] ,initime[0]]),
 	"https://npd.cwb.gov.tw/NPD/irisme_data/Ensemble/EN_QPF/EN2_QPF_ACCU_{0}_{1}.gif".format( [ tau2[1] ,initime[0]]),
 	"https://npd.cwb.gov.tw/NPD/irisme_data/Ensemble/EN_QPF/EN2_QPF_ACCU_{0}_{1}.gif".format( [ tau2[2] ,initime[0]]),
 	"https://npd.cwb.gov.tw/NPD/irisme_data/Ensemble/EN_QPF/EN2_QPF_ACCU_{0}_{1}.gif".format( [ tau2[3] ,initime[0]]),

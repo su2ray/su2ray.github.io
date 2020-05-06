@@ -76,11 +76,31 @@ Date.prototype.caloffdtg = function (args) {
 	    //return out;
 }
 
+var offset = 0;
+function calcOffset() {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("GET", "https://stackoverflow.com/", false);
+    xmlhttp.send();
+
+    var dateStr = xmlhttp.getResponseHeader('Date');
+    var serverTimeMillisGMT = Date.parse(new Date(Date.parse(dateStr)).toUTCString());
+    var localMillisUTC = Date.parse(new Date().toUTCString());
+
+    offset = serverTimeMillisGMT -  localMillisUTC;
+}
+
+function getServerTime() {
+    var date = new Date();
+
+    date.setTime(date.getTime() + offset);
+
+    return date;
+}
 //***********************getinitime***********************//
 
-var wrfday = new Date(); 
+var wrfday = getServerTime();
 var wrfday=wrfday.addHours(-16);
-var wepsday = new Date(); 
+var wepsday = getServerTime(); 
 var wepsday=wepsday.addHours(-22);
 var wrfday2=wrfday.caloffdtg();
 var wepsday2=wepsday.caloffdtg();

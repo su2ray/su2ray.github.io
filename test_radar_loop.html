@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+img{
+  max-width:70%;
+  max-height:70%;
+  width=auto;
+  height=auto;
+  display:block;
+  margin:auto;
+}
+</style>
+</head>
+<meta http-equiv="refresh" content="600"> 
+<body>
+
+<h2>Numerical weather prediction products</h2> 
+<p id="text2"></p>
+<div><img id='demo'></img></div>
+<p id="text1"></p>
+<script>
+// This is the function for strin format//
+String.prototype.format = function (args) {
+		var str = this;
+		return str.replace(String.prototype.format.regex, function(item) {
+		var intVal = parseInt(item.substring(1, item.length - 1));
+		var replace;
+		if (intVal >= 0) {
+				replace = args[intVal];
+			} else if (intVal === -1) {
+				replace = "{";
+			} else if (intVal === -2) {
+				replace = "}";
+			} else {
+				replace = "";
+			}
+			return replace;
+		});
+	};
+	String.prototype.format.regex = new RegExp("{-?[0-9]+}", "g");
+	
+	
+// This is the function for add hours//	
+Date.prototype.addHours= function(h){
+    var copiedDate = new Date(this.getTime());
+    copiedDate.setHours(copiedDate.getHours()+h);
+    return copiedDate;
+}
+	
+	var add_minutes =  function (dt, minutes) {
+    return new Date(dt.getTime() + minutes*60000);
+}
+
+	
+	
+// This is the function for Caldtg as String//		
+Date.prototype.caloffdtg = function (args) {
+		var dtg= this;
+		var hh=dtg.getHours().toString();
+		if (hh >= 18 ) {
+			dtg.setHours(18);
+		} else if (hh >= 12) {
+			dtg.setHours(12);
+		} else if (hh >= 6) {
+			dtg.setHours(6);
+		} else if (hh >= 0) {
+			dtg.setHours(0);
+		}
+		var yy=dtg.getFullYear().toString().slice(2,);
+		var mm=(dtg.getMonth()+1).toString();
+		var dd=dtg.getDate().toString();
+		var hh=dtg.getHours().toString();
+		//var out=yy.concat(mm,dd,hh);
+		  return [(yy>9 ? '' : '0') + yy,
+          (mm>9 ? '' : '0') + mm,
+          (dd>9 ? '' : '0') + dd,
+		  (hh>9 ? '' : '0') + hh,
+         ].join('');
+		
+		
+	    //return out;
+}
+
+// This is the function for make dtg format//		
+Date.prototype.fordtg = function (args) {
+		var dtg= this;
+			var yy=dtg.getFullYear().toString().slice(2,);
+		var mm=(dtg.getMonth()+1).toString();
+		var dd=dtg.getDate().toString();
+		var hh=dtg.getHours().toString();
+		var min=dtg.getMinutes().toString();
+		//var out=yy.concat(mm,dd,hh);
+		  return [(yy>9 ? '' : '0') + yy,
+          (mm>9 ? '' : '0') + mm,
+          (dd>9 ? '' : '0') + dd,
+		  (hh>9 ? '' : '0') + hh,
+		  (min>9 ? '' : '0') + min,
+         ].join('');
+		
+		
+	    //return out;
+}
+
+
+
+var offset = 0;
+function calcOffset() {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("GET", "https://stackoverflow.com/", false);
+    xmlhttp.send();
+
+    var dateStr = xmlhttp.getResponseHeader('Date');
+    var serverTimeMillisGMT = Date.parse(new Date(Date.parse(dateStr)).toUTCString());
+    var localMillisUTC = Date.parse(new Date().toUTCString());
+
+    offset = serverTimeMillisGMT -  localMillisUTC;
+}
+
+function getServerTime() {
+    var date = new Date();
+
+    date.setTime(date.getTime() + offset);
+
+    return date;
+}
+
+
+//***********************getinitime***********************//
+
+var nowday= getServerTime();
+var radartime= [];
+var imageList= [];
+for (var i=0; i< 18 ; i++) {
+var t=-10*i-20
+var radarday=add_minutes(nowday, t);
+var radarday=radarday.fordtg();
+var radartime[i]=radarday;
+var imageList[i] = "https://www.cwb.gov.tw/Data/radar/CV1_TW_3600_20{1}.png".format( radartime[i] );
+}
+
+//document.getElementById("text2").innerHTML = initime;//
+// *********************** Variable *********************** //
+//var initime=["20022018","20022100"];//
+
+
+var freq = 4//sec
+// *********************** Variable *********************** //
+
+// *********************** RunLoop *********************** //
+var demo = document.getElementById('demo');
+var index = 0;
+function changeImage(){
+	demo.setAttribute("src", imageList[index]);
+	document.getElementById("text1").innerHTML = imageList[index];
+	index ++;
+	if(index >= imageList.length){
+		index=0;
+	};
+};
+setInterval(changeImage, freq*1000);
+// *********************** RunLoop *********************** //
+</script>
+</body>
+</html>

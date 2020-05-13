@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+img{
+  max-width:70%;
+  max-height:70%;
+  width=auto;
+  height=auto;
+  display:block;
+  margin:auto;
+}
+p{
+   display:block;
+  margin:auto;
+}
+.left-col:before{
+    width:200;
+    height:100%;
+    display:inline-block;
+    position:relative;
+    vertical-align:middle;
+    }
+.left-col:after{
+    width:100;
+    height:100%;
+    display:inline-block;
+    position:relative;
+    vertical-align:middle;
+    }
+</style>
+</head>
+<meta http-equiv="refresh" content="300"> 
+<body>
+
+<p id="text2"></p>
+<div class="left-col">
+        <div  class="letf-col-img">
+            <img id='demo'>
+        </div>
+    </div>
+<p id="text1"></p>
+<script>
+// This is the function for strin format//
+String.prototype.format = function (args) {
+		var str = this;
+		return str.replace(String.prototype.format.regex, function(item) {
+		var intVal = parseInt(item.substring(1, item.length - 1));
+		var replace;
+		if (intVal >= 0) {
+				replace = args[intVal];
+			} else if (intVal === -1) {
+				replace = "{";
+			} else if (intVal === -2) {
+				replace = "}";
+			} else {
+				replace = "";
+			}
+			return replace;
+		});
+	};
+	String.prototype.format.regex = new RegExp("{-?[0-9]+}", "g");
+	
+	
+// This is the function for add hours//	
+Date.prototype.addHours= function(h){
+    var copiedDate = new Date(this.getTime());
+    copiedDate.setHours(copiedDate.getHours()+h);
+    return copiedDate;
+}
+	
+// This is the function for Caldtg as String//		
+Date.prototype.caloffdtg = function (args) {
+		var dtg= this;
+		var hh=dtg.getHours().toString();
+		if (hh >= 18 ) {
+			dtg.setHours(18);
+		} else if (hh >= 12) {
+			dtg.setHours(12);
+		} else if (hh >= 6) {
+			dtg.setHours(6);
+		} else if (hh >= 0) {
+			dtg.setHours(0);
+		}
+		var yy=dtg.getFullYear().toString().slice(2,);
+		var mm=(dtg.getMonth()+1).toString();
+		var dd=dtg.getDate().toString();
+		var hh=dtg.getHours().toString();
+		//var out=yy.concat(mm,dd,hh);
+		  return [(yy>9 ? '' : '0') + yy,
+          (mm>9 ? '' : '0') + mm,
+          (dd>9 ? '' : '0') + dd,
+		  (hh>9 ? '' : '0') + hh,
+         ].join('');
+		
+		
+	    //return out;
+}
+
+
+
+
+var offset = 0;
+function calcOffset() {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("GET", "https://stackoverflow.com/", false);
+    xmlhttp.send();
+
+    var dateStr = xmlhttp.getResponseHeader('Date');
+    var serverTimeMillisGMT = Date.parse(new Date(Date.parse(dateStr)).toUTCString());
+    var localMillisUTC = Date.parse(new Date().toUTCString());
+
+    offset = serverTimeMillisGMT -  localMillisUTC;
+}
+
+function getServerTime() {
+    var date = new Date();
+
+    date.setTime(date.getTime() + offset);
+
+    return date;
+}
+//***********************getinitime***********************//
+
+var wrfday = getServerTime();
+var wrfday=wrfday.addHours(-16);
+var wepsday = getServerTime(); 
+var wepsday=wepsday.addHours(-22);
+var wrfday2=wrfday.caloffdtg();
+var wepsday2=wepsday.caloffdtg();
+var initime=[wepsday2,wrfday2];
+//document.getElementById("text2").innerHTML = initime;//
+// *********************** Variable *********************** //
+//var initime=["20022018","20022100"];//
+
+var imageList = [
+
+    "https://npd.cwb.gov.tw/NPD/irisme_data/grapher/gifdir/Ntrack/WRFM04/Track_WRFM04_WD01T_20{0}_PSTRK.gif".format( [ initime[1]]),
+	"https://npd.cwb.gov.tw/NPD/irisme_data/grapher/gifdir/Ntrack/WRFM04/Track_WRFM04_WD02T_20{0}_PSTRK.gif".format( [ initime[1]]),
+	"https://npd.cwb.gov.tw/NWPDMS/irisme_data/grapher/gifdir/Ntrack/WRFM05/Track_WRFM05_WD01T_20{0}_PSTRK.gif".format( [ initime[1]]),
+	"https://npd.cwb.gov.tw/NWPDMS/irisme_data/grapher/gifdir/Ntrack/WRFM05/Track_WRFM05_WD02T_20{0}_PSTRK.gif".format( [ initime[1]]),
+	"https://npd.cwb.gov.tw/NPD/irisme_data/grapher/gifdir/Ntrack/GFS/Track_GET_GT00_20{0}_PSTRK.gif".format( [ initime[0]]),
+	"https://npd.cwb.gov.tw/NPD/irisme_data/Ensemble/EN_TRACK_PROBABILITY/WEPS_TY_PROB_{0}.jpg".format( [ initime[0]]),
+	
+		];
+var freq = 10//sec
+// *********************** Variable *********************** //
+
+// *********************** RunLoop *********************** //
+var demo = document.getElementById('demo');
+var index = 0;
+function changeImage(){
+	demo.setAttribute("src", imageList[index]);
+	document.getElementById("text1").innerHTML = imageList[index];
+	index ++;
+	if(index >= imageList.length){
+		index=0;
+	};
+};
+setInterval(changeImage, freq*1000);
+// *********************** RunLoop *********************** //
+</script>
+</body>
+</html>

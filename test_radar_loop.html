@@ -20,6 +20,7 @@ img{
 <div><img id='demo'></img></div>
 <p id="text1"></p>
 <script>
+
 // This is the function for strin format//
 String.prototype.format = function (args) {
 		var str = this;
@@ -84,12 +85,28 @@ Date.prototype.caloffdtg = function (args) {
 
 // This is the function for make dtg format//		
 Date.prototype.fordtg = function (args) {
+
 		var dtg= this;
-			var yy=dtg.getFullYear().toString().slice(2,);
+		var min=dtg.getMinutes().toString();
+		if (min >= 50 ) {
+			dtg.setMinutes(50);
+		} else if (min >= 40 ) {
+			dtg.setMinutes(40);
+		} else if (min >= 30 ) {
+			dtg.setMinutes(30);
+		} else if (min >= 20 ) {
+			dtg.setMinutes(20);
+		} else if (min >= 10 ) {
+			dtg.setMinutes(10);
+		} else if (min >= 0 ) {
+			dtg.setMinutes(0);
+		}
+		var yy=dtg.getFullYear().toString().slice(2,);
 		var mm=(dtg.getMonth()+1).toString();
 		var dd=dtg.getDate().toString();
 		var hh=dtg.getHours().toString();
 		var min=dtg.getMinutes().toString();
+
 		//var out=yy.concat(mm,dd,hh);
 		  return [(yy>9 ? '' : '0') + yy,
           (mm>9 ? '' : '0') + mm,
@@ -125,41 +142,40 @@ function getServerTime() {
     return date;
 }
 
-
-//***********************getinitime***********************//
-
 var nowday= getServerTime();
-var radartime= [];
-var imageList= [];
+var radartime= new Array();
+var imageList= new Array();
 for (var i=0; i< 18 ; i++) {
-var t=-10*i-20
+var t=-10*i-20;
 var radarday=add_minutes(nowday, t);
+//var radarday=nowday;
 var radarday=radarday.fordtg();
-var radartime[i]=radarday;
-var imageList[i] = "https://www.cwb.gov.tw/Data/radar/CV1_TW_3600_20{1}.png".format( radartime[i] );
+ radartime[i]=radarday; 
+ imageList[i] = "https://www.cwb.gov.tw/Data/radar/CV1_3600_20{0}.png".format( [radartime[i]] );
 }
 
 //document.getElementById("text2").innerHTML = initime;//
 // *********************** Variable *********************** //
 //var initime=["20022018","20022100"];//
 
-
-var freq = 4//sec
-// *********************** Variable *********************** //
-
 // *********************** RunLoop *********************** //
 var demo = document.getElementById('demo');
 var index = 0;
 function changeImage(){
 	demo.setAttribute("src", imageList[index]);
+	document.getElementById("text2").innerHTML = radartime[index];
 	document.getElementById("text1").innerHTML = imageList[index];
 	index ++;
 	if(index >= imageList.length){
 		index=0;
 	};
 };
+
+var freq = 4//sec
+// *********************** Variable *********************** //
+//***********************getinitime***********************//
 setInterval(changeImage, freq*1000);
-document.getElementById("text2").innerHTML = imageList;
+
 // *********************** RunLoop *********************** //
 </script>
 </body>

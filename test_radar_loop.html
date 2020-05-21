@@ -16,7 +16,7 @@ img{
 <body>
 
 <div><img id='demo'></img></div>
-<p id="text1"></p>
+
 <script>
 
 // This is the function for strin format//
@@ -161,15 +161,15 @@ var demo = document.getElementById('demo');
 var index = 0;
 function changeImage(){
 	demo.setAttribute("src", imageList[index]);
-	document.getElementById("text2").innerHTML = radartime[index];
-	document.getElementById("text1").innerHTML = imageList[index];
+	//document.getElementById("text2").innerHTML = radartime[index];
+	//document.getElementById("text1").innerHTML = imageList[index];
 	index ++;
 	if(index >= imageList.length){
 		index=0;
 	};
 };
 
-var freq = 2//sec
+var freq = 1//sec
 // *********************** Variable *********************** //
 //***********************getinitime***********************//
 setInterval(changeImage, freq*1000);
